@@ -50,7 +50,9 @@ of steps per day is **10395**.
 intervals <- summarize(group_by(data,interval), mean(steps, na.rm = TRUE))
 colnames(intervals) <- c("interval","avgsteps")
 #plot
-qplot(interval,avgsteps,data=intervals, geom="path", ylab=c("Average number of steps"), main="Average number of steps through the day")
+qplot(interval,avgsteps,data=intervals, geom="path", 
+      ylab=c("Average number of steps"), 
+      main="Average number of steps through the day")
 ```
 
 ![](PA1_template_files/figure-html/dailypattern-1.png)\
@@ -145,7 +147,9 @@ impintervals <- summarize(group_by(imputeddata,weekday,interval), mean(steps))
 colnames(impintervals) <- c("weekday","interval","avgsteps")
 
 #plot
-qplot(interval,avgsteps,data=impintervals, facets = weekday ~ ., geom="path", ylab=c("Average number of steps"), main="Average number of steps through the day")
+qplot(interval,avgsteps,data=impintervals, facets = weekday ~ ., geom="path", 
+      ylab=c("Average number of steps"), 
+      main="Average number of steps through the day")
 ```
 
 ![](PA1_template_files/figure-html/weekdays-1.png)\
