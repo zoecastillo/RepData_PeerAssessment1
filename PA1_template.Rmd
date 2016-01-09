@@ -53,7 +53,9 @@ of steps per day is **`r mediansteps`**.
 intervals <- summarize(group_by(data,interval), mean(steps, na.rm = TRUE))
 colnames(intervals) <- c("interval","avgsteps")
 #plot
-qplot(interval,avgsteps,data=intervals, geom="path", ylab=c("Average number of steps"), main="Average number of steps through the day")
+qplot(interval,avgsteps,data=intervals, geom="path", 
+      ylab=c("Average number of steps"), 
+      main="Average number of steps through the day")
 
 # Step 2: finding the interval containing maximum number of steps
 maxinterval <- as.numeric(intervals[which.max(intervals$avgsteps),"interval"])
@@ -137,7 +139,9 @@ impintervals <- summarize(group_by(imputeddata,weekday,interval), mean(steps))
 colnames(impintervals) <- c("weekday","interval","avgsteps")
 
 #plot
-qplot(interval,avgsteps,data=impintervals, facets = weekday ~ ., geom="path", ylab=c("Average number of steps"), main="Average number of steps through the day")
+qplot(interval,avgsteps,data=impintervals, facets = weekday ~ ., geom="path", 
+      ylab=c("Average number of steps"), 
+      main="Average number of steps through the day")
 ```
 
 There is a noticeable difference in activity between weekdays and weekends. On weekdays, the subject is very active in the earlier morning hours (maybe going for a run before work?) and then more or less inactive with a spikes in activity around lunch time and after work. On weekends, while there are still peaks of activity in the morning, the pattern is much more even, but higher overall. The subject doesn't seem to work out as consistently in the early morning, but is in total more active during the weekend than on weekdays. Based on these differences, I would revise the strategy for imputing the missing values and use the averages for each interval for either weekdays or weekends. It is possible that this strategy would enforce the already existing differences in activity patterns between weekends and weekdays. I further assume that this strategy might lead to an even less significant spike of activity in the early morning hours of weekend days.
